@@ -19,11 +19,27 @@ class Login extends Component {
 		});
 	};
 
+	isFormValid = ({ email, password }) => email && password;
+
 	handleSubmit = event => {
 		event.preventDefault();
 
-		if (this.isFormValid()) {
+		if (this.isFormValid(this.state)) {
 			this.setState({ errors: [], loading: true });
+
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(this.state.email, this.state.password)
+				.then(signedInUser => {
+					this.setState({ loading: false });
+				})
+				.catch(err => {
+					this.setState({ errors: this.state.errors.concat(err), loading: false });
+				});
+		} else {
+			const error = { message: 'All fields are required.' };
+
+			this.setState({ errors: this.state.errors.concat(error) });
 		}
 	};
 
