@@ -16,7 +16,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import firebase from './firebase';
 import rootReducer from './reducers';
-import { setUser } from './actions';
+import { clearUser, setUser } from './actions';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -26,6 +26,9 @@ class Root extends Component {
 			if (user) {
 				this.props.setUser(user);
 				this.props.history.push('/');
+			} else {
+				this.props.clearUser();
+				this.props.history.push('/login');
 			}
 		});
 	}
@@ -50,7 +53,7 @@ const mapStateToProps = state => ({
 const RootWithAuth = withRouter(
 	connect(
 		mapStateToProps,
-		{ setUser }
+		{ clearUser, setUser }
 	)(Root)
 );
 
