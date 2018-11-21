@@ -8,7 +8,7 @@ import Register from './components/auth/Register';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
+import 'semantic-ui-css/semantic.min.css';
 
 const Root = () => (
 	<Router>
