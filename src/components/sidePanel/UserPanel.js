@@ -12,7 +12,7 @@ class UserPanel extends Component {
 	dropdownOptions = () => [
 		{
 			key: 'user',
-			text: (
+			text: this.state.user && (
 				<span>
 					Signed in as <strong>{this.state.user.displayName}</strong>
 				</span>
@@ -51,8 +51,8 @@ class UserPanel extends Component {
 							<Dropdown
 								trigger={
 									<span>
-										<Image src={user.photoURL} spaced="right" avatar />
-										{user.displayName}
+										{user && <Image src={user.photoURL} spaced="right" avatar />}
+										{user && user.displayName}
 									</span>
 								}
 								options={this.dropdownOptions()}
